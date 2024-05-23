@@ -400,7 +400,9 @@ a {
     color: white;
 }
 #projects .project-info a {
-    color: crimson 
+    color: crimson;
+    font-weight: bold;
+    font-size: large; 
 }
 #projects .project-img {
     flex-basis: 50%;
