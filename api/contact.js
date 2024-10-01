@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
 
             if (response.data.success) {
                 // Redirect to a success page
-                return res.redirect('/success');
+                return res.redirect('/success.html');
             } else {
                 return res.status(400).send('Error submitting form: ' + response.data.message);
             }
