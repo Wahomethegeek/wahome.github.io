@@ -20,7 +20,11 @@ module.exports = async (req, res) => {
                 message,
             };
 
+            // Log the form data being sent
+            console.log('Form Data:', formData);
+
             const response = await axios.post('https://api.web3forms.com/submit', formData);
+            console.log('Response from Web3Forms:', response.data);
 
             if (response.data.success) {
                 // Redirect to a success page
@@ -30,13 +34,14 @@ module.exports = async (req, res) => {
             }
         } catch (error) {
             console.error('Error occurred during form submission:', error);
-            return res.status(500).json({ error: 'Error submitting form' });
+            return res.status(500).json({ error: 'Error submitting form: ' + (error.response ? error.response.data : error.message) });
         }
     } else {
         console.error('Method not allowed', req.method);
         res.status(405).json({ error: 'Method not allowed' });
     }
 };
+
 
 
 
