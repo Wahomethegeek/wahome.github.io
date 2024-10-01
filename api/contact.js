@@ -1,4 +1,3 @@
-require('dotenv').config();
 const axios = require('axios');
 
 module.exports = async (req, res) => {
@@ -20,13 +19,13 @@ module.exports = async (req, res) => {
                 message,
             };
 
-            // Send form data to the external Web3Forms API
             const response = await axios.post('https://api.web3forms.com/submit', formData);
 
             if (response.data.success) {
-                return res.status(200).json({ success: true, message: 'Form submitted successfully' });
+                // Redirect to a success page
+                return res.redirect('/success');
             } else {
-                return res.status(400).json({ error: 'Error submitting form: ' + response.data.message });
+                return res.status(400).send('Error submitting form: ' + response.data.message);
             }
         } catch (error) {
             console.error('Error occurred during form submission:', error);
@@ -36,5 +35,6 @@ module.exports = async (req, res) => {
         res.status(405).json({ error: 'Method not allowed' });
     }
 };
+
 
 
