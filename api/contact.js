@@ -1,6 +1,7 @@
 const axios = require('axios');
 
 module.exports = async (req, res) => {
+    console.log('Received request with method:', req.method);
     if (req.method === 'POST') {
         try {
             const { name, email, phone, message } = req.body;
@@ -32,6 +33,7 @@ module.exports = async (req, res) => {
             return res.status(500).json({ error: 'Error submitting form' });
         }
     } else {
+        console.error('Method not allowed', req.method);
         res.status(405).json({ error: 'Method not allowed' });
     }
 };
